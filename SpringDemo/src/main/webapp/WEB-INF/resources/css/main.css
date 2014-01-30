@@ -1,0 +1,21 @@
+body{
+/*	text-align: center; */
+font-family: Corbel;
+}
+h1{
+	color:blue;
+}
+h2{
+	color: red;
+}
+.error{
+	color: red;
+	font-weight: bold;
+}
+li{
+	display: inline-block;
+	padding-left: 30px;
+}
+td{
+	vertical-align: middle;
+}
