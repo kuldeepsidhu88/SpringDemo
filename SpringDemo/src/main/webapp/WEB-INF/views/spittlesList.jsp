@@ -4,11 +4,11 @@
 <h5>No spittles for this user.</h5>
 </c:if>
 <c:if test="${! empty spittleList }">
-<table>
+<table border="1px" width="100%" >
 <c:forEach items="${spittleList}" var="spittle"  >
-<tr>
+<tr><td>
 <c:out value="${spittle.text}"></c:out><br/>
-<i><c:out value="${spittle.createdAt}"></c:out></i>
+<i>posted at - <c:out value="${spittle.createdAt}"></c:out></i></td>
 </tr>
 </c:forEach>
 </table>
