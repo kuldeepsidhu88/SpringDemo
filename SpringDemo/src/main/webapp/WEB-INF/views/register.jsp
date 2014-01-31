@@ -1,6 +1,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<div>
+<div class="basic">
 	<h1>Create a free Spitter account</h1>
 	
 	<sf:form method="POST" modelAttribute="spitter" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
 				</tr>
 				<tr>
 					<th><label>Password : </label></th>
-					<td><sf:password path="password" size="15" id="user_password" /><small>6
+					<td><sf:password path="password" size="15" id="user_password" /><small>3
 							chars</small><br/>
 							<sf:errors path="password" cssClass="error"></sf:errors></td>
 				</tr>

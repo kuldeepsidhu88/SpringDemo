@@ -16,7 +16,14 @@ public class SpitterService {
 	private SpitterDao spitterDao;
 	
 	public List<Spittle> getRecentSpittles(int noOfSpittles){
-		return null;
+		List<Spittle> spittleList = null;
+		try{
+			spittleList = spitterDao.getRecentSpittles(noOfSpittles);
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return spittleList;
 	}
 	
 	public Spitter getSpitter(String username){
@@ -42,13 +49,15 @@ public class SpitterService {
 	}
 	
 	public int saveSpitter(Spitter spitter){
+		int success = 0;
 		try{
-			spitterDao.saveSpitter(spitter);
+			success = spitterDao.saveSpitter(spitter);
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
+			success = -1;
 		}
-		return 0;
+		return success;
 	}
 
 }

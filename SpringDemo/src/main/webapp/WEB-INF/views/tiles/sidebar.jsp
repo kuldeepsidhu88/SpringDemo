@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
-<div id="login">
+<div id="login" class="basic">
 	<sec:authorize access="hasAnyRole('ROLE_SPITTER','ROLE_ADMIN')">
 		<h3>
 			User loggedin : 
@@ -23,7 +23,7 @@
 					</tr>
 					<tr>
 						<th>Password</th>
-						<td><input id="password" name="j_password" type="password" />
+						<td><input id="password" name="j_password" type="password" /><br/>
 							<small><a href="#">Forgot Password?</a> </small></td>
 					</tr>
 					<tr>

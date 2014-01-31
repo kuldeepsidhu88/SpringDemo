@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.demo.constants.SpitterConstants;
 import com.demo.model.Spitter;
 import com.demo.model.Spittle;
+import com.demo.util.SpitterUtil;
 
 @Component
 public class SpitterDaoImpl implements SpitterDao {
@@ -32,8 +33,17 @@ public class SpitterDaoImpl implements SpitterDao {
 
 	@Override
 	public List<Spittle> getRecentSpittles(int noOfSpittles) {
-
-		return null;
+		jdbcTemplate = new JdbcTemplate(this.dataSource);
+		List<Spittle> spittleList = null;
+		try{
+			String sql = SpitterConstants.RECENT_SPITTLE_LIST;
+			List<Map<String,Object>> rows = jdbcTemplate.queryForList(sql, new Object[]{noOfSpittles});
+			spittleList = SpitterUtil.getSpittleList(rows);
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		return spittleList;
 	}
 
 	@Override
@@ -47,9 +57,9 @@ public class SpitterDaoImpl implements SpitterDao {
 				@Override
 				public Object mapRow(ResultSet rs, int arg1) throws SQLException {
 					Spitter spitter = new Spitter();
-					spitter.setUsername(rs.getString("USERNAME"));
-					spitter.setEmail(rs.getString("EMAIL_ID"));
-					spitter.setFullName(rs.getString("FULL_NAME"));
+					spitter.setUsername(rs.getString("username"));
+					spitter.setEmail(rs.getString("email_id"));
+					spitter.setFullName(rs.getString("full_name"));
 					return spitter;
 				}
 				
@@ -64,18 +74,11 @@ public class SpitterDaoImpl implements SpitterDao {
 	@Override
 	public List<Spittle> getSpittlesForSpitter(String username) {
 		jdbcTemplate = new JdbcTemplate(this.dataSource);
-		List<Spittle> spittleList = new ArrayList<Spittle>();
+		List<Spittle> spittleList = null;
 		try{
 			String sql = SpitterConstants.SPITTLE_LIST;
 			List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, new Object[]{username});
-			for(Map<String,Object> row:rows){
-				Spittle spittle = new Spittle();
-				spittle.setId(Integer.parseInt(row.get("spittle_id").toString()));
-				spittle.setText(row.get("text").toString());
-				spittle.setCreatedAt(row.get("created_at").toString());
-				spittle.setUsername(row.get("username").toString());
-				spittleList.add(spittle);
-			}
+			spittleList = SpitterUtil.getSpittleList(rows);
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
@@ -85,7 +88,7 @@ public class SpitterDaoImpl implements SpitterDao {
 
 	@Override
 	public int saveSpitter(Spitter spitter) {
-
+		int success = 0;
 		jdbcTemplate = new JdbcTemplate(this.dataSource);
 		try{
 			String sql = SpitterConstants.INSERT_SPITTER;
@@ -98,8 +101,9 @@ public class SpitterDaoImpl implements SpitterDao {
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());
+			success = -1;
 		}
-		return 0;
+		return success;
 	}
 
 }

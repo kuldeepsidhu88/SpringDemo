@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
+<div class="basic">
 <c:choose>
 <c:when test="${spitter != null }">
+<h3>Profile Details for : ${spitter.username}</h3>
 <table border="solid black 1">
 <tr>
 <td>Profile Image : </td>

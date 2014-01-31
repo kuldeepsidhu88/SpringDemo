@@ -29,4 +29,7 @@
 	<definition name="spitters/profile" extends="template">
 		<put-attribute name="content" value="/WEB-INF/views/profile.jsp"></put-attribute>
 	</definition>
+	<definition name="spittles/recent" extends="template">
+		<put-attribute name="content" value="/WEB-INF/views/recentSpittles.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

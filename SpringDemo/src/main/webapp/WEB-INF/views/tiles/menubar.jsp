@@ -5,7 +5,7 @@
 <ul>
 <sec:authorize access="permitAll">
 <li><h3><a href='<s:url value="/welcome"></s:url>'>Home</a></h3></li>
-<li><h3><a href='<s:url value="#"></s:url>'>Recent Spittles</a></h3></li>
+<li><h3><a href='<s:url value="/spittles/recent"></s:url>'>Recent Spittles</a></h3></li>
 </sec:authorize>
 <sec:authorize access="hasAnyRole('ROLE_SPITTER','ROLE_ADMIN')">
 <sec:authentication property="principal.username" var="username"/>

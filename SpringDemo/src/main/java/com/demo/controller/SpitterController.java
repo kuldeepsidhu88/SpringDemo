@@ -21,6 +21,7 @@ import com.demo.constants.SpitterConstants;
 import com.demo.model.Spitter;
 import com.demo.model.Spittle;
 import com.demo.service.SpitterService;
+import com.demo.util.SpitterUtil;
 
 @Controller
 @RequestMapping("/spitters")
@@ -60,11 +61,15 @@ public class SpitterController {
 		}
 		
 		// save spitter in db
-		spitterService.saveSpitter(spitter);
+		int success = spitterService.saveSpitter(spitter);
+		if(success!=0){
+			bindingResult.reject("USER_EXISTS","User already exists");
+			return "spitters/register";
+		}
 		try {
 			if(null!=image && !image.isEmpty()){
-				validateImage(image);
-				saveImage(spitter.getUsername()+".jpg",image);
+				SpitterUtil.validateImage(image);
+				SpitterUtil.saveImage(spitter.getUsername()+".jpg",image);
 			}
 		} catch (Exception e) {
 			bindingResult.reject("IMG_NOT_VALID",e.getMessage());
@@ -85,33 +90,9 @@ public class SpitterController {
 		spitter.setUsername("spitter");*/
 		Spitter spitter = spitterService.getSpitter(username);
 		if(null!=spitter)
-			spitter.setProfileImageUrl(getProfileImage(username));
+			spitter.setProfileImageUrl(SpitterUtil.getProfileImage(username));
 		model.addAttribute(spitter);
 		return "spitters/profile";
 	}
 	
-	private void validateImage(MultipartFile image) throws Exception{
-		if(!image.getContentType().equals("image/jpeg")){
-			throw new Exception("Only JPG images accepted");
-		}
-	}
-	
-	private void saveImage(String filename,MultipartFile image) throws Exception{
-		try{
-			File file = new File(SpitterConstants.IMAGE_PATH+filename);
-			FileUtils.writeByteArrayToFile(file, image.getBytes());
-			
-		}
-		catch(Exception e){
-			throw new Exception("Unable to save image");
-		}
-	}
-	
-	private String getProfileImage(String username){
-		File file = new File(SpitterConstants.IMAGE_PATH+username+".jpg");
-		if (file.exists())
-			return file.getPath();
-		else
-			return null;
-	}
 }

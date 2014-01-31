@@ -12,7 +12,7 @@ public class Spitter {
 	@Pattern(regexp="^[a-zA-Z0-9]+$", message="Username must be alpha numeric without spaces")
 	private String username;
 	
-	@Size(min=6,max=20,message="Password must be between 6 and 20 characters long.")
+	@Size(min=3,max=20,message="Password must be between 3 and 20 characters long.")
 	private String password;
 	
 	@Pattern(regexp="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",message="Invalid email address.")

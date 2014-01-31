@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="basic">
 <h3>Spittles for user : ${username}</h3>
 <c:if test="${empty spittleList}">
 <h5>No spittles for this user.</h5>
@@ -13,4 +14,4 @@
 </c:forEach>
 </table>
 </c:if>
-
+</div>
