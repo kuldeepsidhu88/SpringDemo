@@ -14,5 +14,6 @@ public interface SpitterDao {
 	public Spitter getSpitter(String username);
 	public List<Spittle> getSpittlesForSpitter(String username);
 	public int saveSpitter(Spitter spitter);
+	public int saveSpittle(String spittleText,String username);
 
 }

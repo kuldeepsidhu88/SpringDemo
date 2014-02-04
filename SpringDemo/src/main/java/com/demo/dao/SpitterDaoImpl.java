@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
+import javax.xml.soap.Text;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -98,6 +99,22 @@ public class SpitterDaoImpl implements SpitterDao {
 				spitter.getEmail(),
 				spitter.getFullName()
 			});
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+			success = -1;
+		}
+		return success;
+	}
+
+	@Override
+	public int saveSpittle(String spittleText,String username) {
+		int success = 0;
+		jdbcTemplate = new JdbcTemplate(this.dataSource);
+		try{
+			String sql = SpitterConstants.INSERT_SPITTLE;
+			jdbcTemplate.update(sql, new Object[]{spittleText,username});
+			
 		}
 		catch(Exception ex){
 			System.out.println(ex.getMessage());

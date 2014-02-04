@@ -6,8 +6,15 @@
 		Welcome
 		<sec:authentication property="principal.username" />
 	</h1>
+	<h1>${message}</h1>
+	<h1>Post a new Spittle</h1>
+	<c:url value="/spittles" var="url"/>
+	<form method="post" action="${url}">
+		<textarea name="spittleText" id="spittle" rows="4" cols="40" placeholder="Write your spittle" ></textarea><br/>
+		<input type="submit" value="Submit"/>
+	</form>
 </sec:authorize>
-<h1>${message}</h1>
+
 
 <c:if test="${login_error ne ''}">
 	<h2>${login_error}</h2>

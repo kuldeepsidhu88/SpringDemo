@@ -59,5 +59,17 @@ public class SpitterService {
 		}
 		return success;
 	}
+	
+	public int saveSpittle(String spittleText,String username){
+		int success = 0;
+		try{
+			success = spitterDao.saveSpittle(spittleText,username);
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+			success = -1;
+		}
+		return success;
+	}
 
 }
