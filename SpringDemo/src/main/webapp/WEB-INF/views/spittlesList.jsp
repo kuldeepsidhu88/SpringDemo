@@ -10,6 +10,7 @@
 <tr><td>
 <c:out value="${spittle.text}"></c:out><br/>
 <i>posted at - <c:out value="${spittle.createdAt}"></c:out></i></td>
+<td><a href="#">Delete</a></td>
 </tr>
 </c:forEach>
 </table>
