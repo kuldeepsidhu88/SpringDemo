@@ -14,7 +14,7 @@ import com.demo.model.Spittle;
 public class SpitterUtil {
 	
 	public static List<Spittle> getSpittleList(List<Map<String, Object>> rows){
-		List<Spittle> spittleList = new ArrayList<>();
+		List<Spittle> spittleList = new ArrayList<Spittle>();
 		for(Map<String,Object> row:rows){
 			Spittle spittle = new Spittle();
 			spittle.setId(Integer.parseInt(row.get("spittle_id").toString()));
