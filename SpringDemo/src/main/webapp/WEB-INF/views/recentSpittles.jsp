@@ -16,7 +16,7 @@
 <c:url value="/spitters/${username}" var="url"/>
 <td width="10%"><a href="${url}">${username}</a> </td>
 <td><c:out value="${spittle.text}"/><br/><i>posted at - <c:out value="${spittle.createdAt}"/></i></td>
-<c:if test="${spittle.username eq loginuser}"><td width="10%"><a href="#">Delete</a></td></c:if>
+<c:if test="${spittle.username eq loginuser}"><td width="10%"><a href="<c:url value="/spitters/delete/${spittle.id}"/>">Delete</a></td></c:if>
 </tr>
 </c:forEach>
 </table>
